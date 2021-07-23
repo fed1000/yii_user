@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%user}}`.
  */
-class m210722_010723_create_user_table extends Migration
+class m210722_014109_create_user_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -21,12 +21,12 @@ class m210722_010723_create_user_table extends Migration
  
         $this->createTable('user', [
             'id' => $this->primaryKey(),
-            'username' => $this->string()->notNull()->unique(),
+            'username' => $this->string()->notNull()->unique()->defaultValue(''),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
             'email' => $this->string()->notNull()->unique(),
-            'partner_id' => $this->integer(10)->notNull()->unique()->defaultValue(),
+            'partner_id' => $this->integer(10)->notNull()->unique(),
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
