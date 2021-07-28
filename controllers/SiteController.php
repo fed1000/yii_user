@@ -72,14 +72,20 @@ class SiteController extends Controller
         }
     }
 
-    public function actionSignup()
+    public function actionSignup($partner_id=false)
     {
+        
         $model = new SignupForm();
- 
+        if(!empty($partner_id)) {
+            
+            $model_p = User::find()->where(['partner_id' => $partner_id])->one();
+            
+        }
+        
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                    
                 }
             }
         }

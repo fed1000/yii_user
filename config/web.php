@@ -43,14 +43,16 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+            	 'site/signup/<partner_id:\d+>'=>'site/signup',
+
             ],
         ],
-        */
+        
     ],
     'params' => $params,
 ];

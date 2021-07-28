@@ -34,6 +34,7 @@ class User extends ActiveRecord implements IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+    public $partner_id;
 
     /**
      * @inheritdoc
@@ -157,6 +158,27 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => self::STATUS_ACTIVE,
         ]);
     }
+
+    public function randomNumber()
+    {
+        //for generating random number
+        $length =10;
+        $chars = array_merge(range(0,9));
+        shuffle($chars);
+        $password = implode(array_slice($chars, 0,$length));
+        return $password;
+
+    }
+
+    public function generatePartnerId()
+    {
+        //for generating random number
+        $length =10;
+        $chars = array_merge(range(0,9));
+        shuffle($chars);
+        $password = implode(array_slice($chars, 0,$length));
+        $this->partner_id = $password;
+    }
      
     public static function isPasswordResetTokenValid($token)
     {
@@ -184,5 +206,10 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findByEmail($email)
     {
         return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    public static function findByPartnerId($partner_id)
+    {
+        return static::findOne(['partner_id' => $partner_id, 'status' => self::STATUS_ACTIVE]);
     }
 }
